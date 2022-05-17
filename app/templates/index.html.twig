@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Random ICNDB viccek és képek</h1>
+                <table class="table table-striped" style="border: 1px black solid">
+                    <tbody>
+                        {% set index = 1 %}
+                        {% set picCount = 1 %}
+                        {% for joke in jokes.value %}
+                            <tr>
+                                <td>{{ index }}.</td>
+                                {% if index is divisible by(mod) %}
+                                    <td>
+                                        <iframe src=" https://picsum.photos/{{ picCount * 100 }}/100" style="height: 100px;"></iframe>
+                                    </td>
+                                    {% set picCount = picCount + 1 %}
+                                {% else %}
+                                    <td>{{ joke.joke }}</td>
+                                {% endif %}
+                            </tr>
+                            {% set index = index + 1 %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </div>
+{% endblock %}
