@@ -18,11 +18,18 @@ class ViccekController extends AbstractController
     public function index(int $size, int $mod): Response
     {
         $icndbService = new IcndbService();
+
+        //maximalizáljuk a viccek számák 50-re
+        if ($size > 50) {
+            $jokesLimit = 'Bocsi, a viccek száma 50-re van korlátozva';
+            $size = 50;
+        }
         $jokes = $icndbService->getJokes($size);
 
         return $this->render('index.html.twig', [
             'jokes' => $jokes,
-            'mod' => $mod
+            'mod' => $mod,
+            'jokesLimit' => $jokesLimit ?? ''
         ]);
     }
 }
