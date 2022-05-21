@@ -26,10 +26,15 @@ class ViccekController extends AbstractController
         }
         $jokes = $icndbService->getJokes($size);
 
+        if ($jokes == '') {
+            $noJokes = 'Elnézést, a viccek átmenetileg nem elérhetőek, próbáld meg később!';
+        }
+
         return $this->render('index.html.twig', [
             'jokes' => $jokes,
             'mod' => $mod,
-            'jokesLimit' => $jokesLimit ?? ''
+            'jokesLimit' => $jokesLimit ?? '',
+            'noJokes' => $noJokes ?? ''
         ]);
     }
 }

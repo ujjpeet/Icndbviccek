@@ -8,15 +8,13 @@ class IcndbService
      */
     public function getJokes(int $jokesCount)
     {
-        try {
-            $apiUrl = "http://api.icndb.com/jokes/random/".$jokesCount;
-            $jokes = file_get_contents($apiUrl);
+        $apiUrl = "http://api.icndb.com/jokes/random/".$jokesCount;
+        $jokes = file_get_contents($apiUrl);
 
-
-        } catch (\Exception $exception) {
-            ;
+        if (isset($jokes)) {
+            return json_decode($jokes);
+        } else {
+            return '';
         }
-
-        return json_decode($jokes);
     }
 }
